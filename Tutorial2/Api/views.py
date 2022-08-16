@@ -1,13 +1,14 @@
 from .models import Student
 from rest_framework import generics
 from .serializers import StudentSerializer
-# Create your views here.
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 
-
-class Studentlist(generics.ListCreateAPIView):
+@method_decorator(csrf_exempt, name='dispatch')
+class StudentList(generics.ListCreateAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
 
-class Studentdetails(generics.RetrieveUpdateDestroyAPIView):
+class StudentDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer

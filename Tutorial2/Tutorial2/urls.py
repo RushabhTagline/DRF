@@ -14,5 +14,5 @@ urlpatterns = [
         template_name='swagger.html',
         extra_context={'schema_url':'openapi-schema'}
     ), name='swagger-ui'),
-    
 ]
+
