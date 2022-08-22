@@ -13,13 +13,18 @@ class StudentSerializer(serializers.ModelSerializer):
         model = Student
         fields = ['first_name','last_name','grade','age']
 
-    # def validate(self, attrs):
-    #     print()
-        
-    #     if attrs.get('age') == 0 :
-    #         raise serializers.ValidationError({'age' : 'Please enter right age'})
+    def validate(self, attrs):
+        print()
+        if attrs.get('first_name') == 'string' or attrs.get('first_name') == '':
+            raise serializers.ValidationError({'First name' : 'Please enter valide name'})
+        if attrs.get('last_name') == 'string' or attrs.get('last_name') == '':
+            raise serializers.ValidationError({'Last name' : 'Please enter valide name'})
+        if attrs.get('grade') == 'string' or attrs.get('grade') == '':
+            raise serializers.ValidationError({'Grade' : 'Please enter valide grade'})
+        if attrs.get('age') == 0 :
+            raise serializers.ValidationError({'age' : 'Please enter right age'})
        
-    #     return super(StudentSerializer, self).validate(attrs)
+        return super(StudentSerializer, self).validate(attrs)
 
     def create(self, validate_data):
         return Student.objects.create(**validate_data)
